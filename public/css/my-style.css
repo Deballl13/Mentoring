@@ -1,0 +1,12 @@
+.role-header {
+  width: 25vh;
+}
+
+.role-header::after {
+  content: "";
+  display: block;
+  margin-top: 20px;
+  height: 8px;
+  border-radius: 71.5px;
+  background-color: #13c525;
+}
