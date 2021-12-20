@@ -52,11 +52,15 @@ require_once '../layout/header.php';
             <div class="card-body">
             <form method="POST" action="<?= BASEURL ?>/routes/routeMentoring.php" class="pt-3">
                 <div class="form-group">
-                    <label for="jadwal">Jadwal</label>
-                    <input type="date" class="form-control" name="jadwal" id="jadwal" placeholder="Masukkan Tanggal Mentoring">
+                    <label for="tanggal">Tanggal</label>
+                    <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Masukkan Tanggal Mentoring">
                 </div>
                 <div class="form-group">
-                    <label for="nama_pertemuan">Pertemuan ke</label>
+                    <label for="waktu">Waktu</label>
+                    <input type="time" class="form-control" name="waktu" id="waktu" placeholder="Masukkan Waktu Pertemuan">
+                </div>
+                <div class="form-group">
+                    <label for="pertemuan_ke">Pertemuan ke</label>
                     <input type="number" class="form-control" name="pertemuan_ke" id="pertemuan_ke" placeholder="Masukkan Pertemuan ke">
                 </div>
                 <div class="form-group">

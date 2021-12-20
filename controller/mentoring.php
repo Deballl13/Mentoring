@@ -2,7 +2,7 @@
 
 class Mentoring{
 
-     private $db;
+    private $db;
     private $dbh;
 
     public function __construct(){
@@ -24,10 +24,11 @@ class Mentoring{
     }
 
     public function tambahPertemuan($data){
-        $jadwal = htmlspecialchars(trim(date('Y-m-d', strtotime($data['jadwal']))));
+        $tanggal = htmlspecialchars(trim(date('Y-m-d', strtotime($data['tanggal']))));
+        $waktu = htmlspecialchars(trim(date('H:i:s', strtotime($data['waktu']))));
         $pertemuan_ke = htmlspecialchars(trim($data['pertemuan_ke']));
         $materi = htmlspecialchars(trim($data['materi']));
-
+        
         try{
             $this->db->begin_transaction();
 
@@ -36,8 +37,8 @@ class Mentoring{
             $statement->execute();
             $kelompok = $statement->get_result()->fetch_assoc()['kelompok'];
 
-            $statement =$this->db->prepare("INSERT INTO pertemuan VALUES ('', ?, ?, ?, ?)");
-            $statement->bind_param("isss", $kelompok, $jadwal, $pertemuan_ke, $materi);
+            $statement =$this->db->prepare("INSERT INTO pertemuan VALUES ('', ?, ?, ?, ?, ?)");
+            $statement->bind_param("issss", $kelompok, $tanggal, $pertemuan_ke, $waktu, $materi);
             $statement->execute();
         
             if($this->db->commit() == true){

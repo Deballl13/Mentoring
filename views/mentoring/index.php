@@ -67,7 +67,7 @@ require_once '../layout/header.php';
                             <td><?= $i++.'.' ?></td>
                             <td><?= $lp['kelompok'] ?></td>
                             <td><?= $lp['pertemuan_ke'] ?></td>
-                            <td><?= $lp['jadwal'] ?></td>                            
+                            <td><?= date('d-m-Y', strtotime($lp['tanggal'])).' ('.date('H:i', strtotime($lp['waktu'])).')' ?></td>                            
                             <td>
                                 <form action="<?= BASEURL ?>/routes/routeMentoring.php" method="post" onsubmit="return confirm('Yakin mau dihapus?')">
                                     <a class="btn btn-primary" href="<?= BASEURL ?>/views/mentoring/detail.php?id=<?= $lp['id'] ?>">Detail</a>

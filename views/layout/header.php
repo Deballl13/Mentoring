@@ -61,7 +61,7 @@
                     </a>
                 </li>
                 <li class="nav-item <?= ($menu==='Ujian') ? 'active' : '' ?>">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="<?= BASEURL ?>/views/ujian">
                         <i class="mdi mdi-file-document menu-icon"></i>
                         <span class="menu-title">Ujian</span>
                     </a>
