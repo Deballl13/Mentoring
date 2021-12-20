@@ -19,7 +19,7 @@ class Auth{
         $email = htmlspecialchars(trim($data['email']));
         $no_hp = htmlspecialchars(trim($data['no_hp']));
         $jurusan = htmlspecialchars(trim(ucwords(strtolower($data['jurusan']))));
-        $password = password_hash(htmlspecialchars(trim($data["password"])), PASSWORD_BCRYPT);
+        $password = password_hash('12345', PASSWORD_BCRYPT);
 
         try{
             $this->db->begin_transaction();
@@ -109,6 +109,23 @@ class Auth{
         $statement->bind_param('i', $_SESSION['user']['nim']);
         $statement->execute();
         return $statement->get_result()->fetch_assoc();
+    }
+
+    public function changePass($data){
+        $password = htmlspecialchars(password_hash($data['password'], PASSWORD_BCRYPT));
+        
+        $statement = $this->db->prepare('UPDATE users SET password = ?  WHERE nim = ?');
+        $statement->bind_param('si', $password, $_SESSION['user']['nim']);
+        $statement->execute();
+
+        if($this->db->affected_rows > 0){
+            $_SESSION['berhasil'] = 'Password berhasil diganti';
+        }
+        else{
+            $_SESSION['gagal'] = 'Password gagal diganti';
+        }
+        $statement->close();
+        header('Location: '.BASEURL.'/views/auth/profil.php');
     }
 
 }

@@ -18,3 +18,6 @@ elseif(isset($_POST['logout'])){
       $auth->logout();
       header('Location: '.BASEURL.'/views/auth/login.php');
 }
+elseif(isset($_POST['ganti-password'])){
+      $auth->changePass($_POST);
+}

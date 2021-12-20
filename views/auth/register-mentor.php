@@ -148,17 +148,6 @@
                                         <input type="text" id="jurusan" name="jurusan" class="form-control form-control-lg border-left-0" placeholder="Masukkan Jurusan">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend bg-transparent">
-                                            <span class="input-group-text bg-transparent border-right-0">
-                                                <i class="mdi mdi-lock text-primary"></i>
-                                            </span>
-                                        </div>
-                                        <input type="password" id="password" name="password" class="form-control form-control-lg border-left-0" placeholder="Masukkan Password">
-                                    </div>
-                                </div>
                                 <div class="mb-4">
                                     <div class="form-check">
                                         <label class="form-check-label text-muted">
