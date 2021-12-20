@@ -66,12 +66,22 @@
                         <span class="menu-title">Ujian</span>
                     </a>
                 </li>
+                <?php if($_SESSION['user']['role'] === 'mentor' ): ?>
                 <li class="nav-item <?= ($menu==='Mentoring') ? 'active' : '' ?>">
-                    <a class="nav-link" href="#">
+                <a class="nav-link" href="<?= BASEURL ?>/views/mentoring">
                         <i class="mdi mdi mdi-account-multiple menu-icon"></i>
                         <span class="menu-title">Mentoring</span>
                     </a>
                 </li>
+                <?php endif ?>
+                <?php if($_SESSION['user']['role'] === 'mentee' ||$_SESSION['user']['role'] === 'bpmai'): ?>
+                <li class="nav-item <?= ($menu==='Mentoring') ? 'active' : '' ?>">
+                <a class="nav-link" href="<?= BASEURL ?>/views/mentoring/indexpeserta.php">
+                        <i class="mdi mdi mdi-account-multiple menu-icon"></i>
+                        <span class="menu-title">Mentoring</span>
+                    </a>
+                </li>
+                <?php endif ?>
                 <li class="nav-item <?= ($menu==='Kelompok Mentoring') ? 'active' : '' ?>">
                     <a class="nav-link" href="#">
                         <i class="mdi mdi-account-group menu-icon"></i>
