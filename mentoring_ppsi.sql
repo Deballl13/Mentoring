@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2021 at 11:09 PM
+-- Generation Time: Dec 21, 2021 at 12:35 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -44,8 +44,9 @@ CREATE TABLE `jawaban_ujian` (
 CREATE TABLE `pertemuan` (
   `id` bigint(20) NOT NULL,
   `kelompok` tinyint(2) NOT NULL,
-  `jadwal` date NOT NULL,
+  `tanggal` date NOT NULL,
   `pertemuan_ke` tinyint(3) NOT NULL,
+  `waktu` time NOT NULL,
   `materi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -53,12 +54,11 @@ CREATE TABLE `pertemuan` (
 -- Dumping data for table `pertemuan`
 --
 
-INSERT INTO `pertemuan` (`id`, `kelompok`, `jadwal`, `pertemuan_ke`, `materi`) VALUES
-(3, 2, '2021-12-13', 1, 'Ini materi 1'),
-(4, 2, '2021-12-18', 2, 'Ini materi pertemuan 2'),
-(5, 2, '2021-12-25', 3, 'materi pertemuan 3'),
-(7, 2, '2021-12-27', 4, 'materi pertemuan 4'),
-(8, 2, '2021-12-31', 5, 'ini merupakan materi ke 5');
+INSERT INTO `pertemuan` (`id`, `kelompok`, `tanggal`, `pertemuan_ke`, `waktu`, `materi`) VALUES
+(3, 2, '2021-12-13', 1, '19:30:00', 'Ini materi 1'),
+(4, 2, '2021-12-18', 2, '19:30:00', 'Ini materi pertemuan 2'),
+(5, 2, '2021-12-25', 3, '08:00:00', 'materi pertemuan 3'),
+(7, 2, '2021-12-27', 4, '19:00:00', 'materi pertemuan 4');
 
 -- --------------------------------------------------------
 
@@ -108,6 +108,13 @@ CREATE TABLE `ujian` (
   `tanggal` datetime NOT NULL,
   `durasi` int(11) NOT NULL COMMENT 'dalam hitungan menit'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ujian`
+--
+
+INSERT INTO `ujian` (`id`, `tanggal`, `durasi`) VALUES
+(1, '2022-01-08 10:00:00', 90);
 
 -- --------------------------------------------------------
 
@@ -200,7 +207,7 @@ ALTER TABLE `jawaban_ujian`
 -- AUTO_INCREMENT for table `pertemuan`
 --
 ALTER TABLE `pertemuan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `presensi`
@@ -218,7 +225,7 @@ ALTER TABLE `soal_ujian`
 -- AUTO_INCREMENT for table `ujian`
 --
 ALTER TABLE `ujian`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
