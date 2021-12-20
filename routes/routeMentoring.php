@@ -6,11 +6,8 @@ require_once '../controller/mentoring.php';
 
 $mentoring = new Mentoring;
 if(isset($_POST['hapus'])){
-    $mentoring->delete($_POST['id']);
+    $mentoring->deletePertemuan($_POST['id']);
 }
 else if(isset($_POST['tambah-materi'])){
-    $mentoring->tambah($_POST, 'mentor');
+    $mentoring->tambahPertemuan($_POST, 'mentor');
 }
-// else if(isset($_POST['bagi-kelompok-mentee'])){
-//     $pendaftaran->gachaGroup($_POST['numberGroup'], 'mentee');
-// }

@@ -12,10 +12,9 @@ $auth  = new Auth;
 $mentoring = new Mentoring;
 
 $profil = $auth->getProfil();
-$listMateri = $mentoring->listMateri();
 // $listMentee = $pendaftaran->listMentee();
 
-$title = 'Mentoring | Pendaftaran';
+$title = 'Mentoring | Tambah Pertemuan';
 $menu = 'Mentoring';
 require_once '../layout/header.php';
 
@@ -57,22 +56,18 @@ require_once '../layout/header.php';
                     <input type="date" class="form-control" name="jadwal" id="jadwal" placeholder="Masukkan Tanggal Mentoring">
                 </div>
                 <div class="form-group">
-                    <label for="nama_pertemuan">Nama Pertemuan</label>
-                    <input type="text" class="form-control" name="nama_pertemuan" id="nama_pertemuan" placeholder="Masukkan nama_pertemuan">
-                </div>
-                <div class="form-group">
-                    <label for="kelompok">Kelompok</label>
-                    <input type="text" class="form-control" name="kelompok" id="kelompok" placeholder="Masukkan Kelompok">
+                    <label for="nama_pertemuan">Pertemuan ke</label>
+                    <input type="number" class="form-control" name="pertemuan_ke" id="pertemuan_ke" placeholder="Masukkan Pertemuan ke">
                 </div>
                 <div class="form-group">
                     <label for="materi">Materi</label>
-                    <textarea class="form-control" name="materi" id="materi" rows="3"></textarea>
+                    <textarea class="form-control" name="materi" id="materi" rows="20"></textarea>
                 </div>
-
                 <button type="submit" name="tambah-materi" class="btn btn-primary">Tambah</button>
-
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<?php require_once '../layout/footer.php' ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2021 at 08:51 AM
+-- Generation Time: Dec 20, 2021 at 11:09 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -44,9 +44,21 @@ CREATE TABLE `jawaban_ujian` (
 CREATE TABLE `pertemuan` (
   `id` bigint(20) NOT NULL,
   `kelompok` tinyint(2) NOT NULL,
-  `jadwal` datetime NOT NULL,
-  `materi` varchar(100) NOT NULL
+  `jadwal` date NOT NULL,
+  `pertemuan_ke` tinyint(3) NOT NULL,
+  `materi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pertemuan`
+--
+
+INSERT INTO `pertemuan` (`id`, `kelompok`, `jadwal`, `pertemuan_ke`, `materi`) VALUES
+(3, 2, '2021-12-13', 1, 'Ini materi 1'),
+(4, 2, '2021-12-18', 2, 'Ini materi pertemuan 2'),
+(5, 2, '2021-12-25', 3, 'materi pertemuan 3'),
+(7, 2, '2021-12-27', 4, 'materi pertemuan 4'),
+(8, 2, '2021-12-31', 5, 'ini merupakan materi ke 5');
 
 -- --------------------------------------------------------
 
@@ -124,9 +136,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`nim`, `nama`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `email`, `no_hp`, `jurusan`, `role`, `kelompok`, `password`) VALUES
 (1911511001, 'Luqmanul Hakim', 'L', 'Padang', '2000-12-31', 'hakim@gmail.com', '081232132131', 'Teknik Komputer', 'bpmai', NULL, '$2y$10$nbUyP3yVl3dXJqZWhXmPHOb3ItEU1bzRsO5zodl3Huy5t957uyHfu'),
 (1911521001, 'Nadya Gusdita', 'P', 'Jambi', '2001-08-20', 'nadya@gmail.com', '081298347601', 'Sistem Informasi', 'mentor', 1, '$2y$10$zqBoksg/RO5RXfdFg7H6jO6.FPEE66v.eCgRJ/OLDaka0vMN1Vom6'),
+(1911521003, 'Vira Yulia', 'P', 'Dumai', '2001-07-13', 'vira@gmail.com', '081234567890', 'Sistem Informasi', 'mentee', 1, '$2y$10$zmNHm8.jeiIAFEiISX.kgevtwiI/u0T9Ozg9hHeLlDPCYzmZSAQf.'),
 (1911521025, 'Ade Iqbal', 'L', 'Padang', '2001-01-10', 'iqbal@gmail.com', '081232132131', 'Sistem Informasi', 'mentor', 2, '$2y$10$nbUyP3yVl3dXJqZWhXmPHOb3ItEU1bzRsO5zodl3Huy5t957uyHfu'),
-(1911522019, 'Arif Roska Perdana', 'L', 'Padang', '2000-10-12', 'arif@gmail.com', '082131231231', 'Sistem Informasi', 'mentee', NULL, '$2y$10$ZOcNYNFhxShy1kU4.DzoN.Sc7WOF7KWRh9Al2i1ZG2Gcr8GReLyli'),
-(2011522003, 'Bambang Santoso', 'L', 'Medan', '2002-10-02', 'bambang@gmail.com', '084398127634', 'Sistem Informasi', 'mentee', NULL, '$2y$10$tkQis6y564iujUOwb6TeXe97nErUXsQlCSiaaZOp6paQxoSDe6PzK');
+(1911522019, 'Arif Roska Perdana', 'L', 'Padang', '2000-10-12', 'arif@gmail.com', '082131231231', 'Sistem Informasi', 'mentee', 2, '$2y$10$ZOcNYNFhxShy1kU4.DzoN.Sc7WOF7KWRh9Al2i1ZG2Gcr8GReLyli'),
+(2011522003, 'Bambang Santoso', 'L', 'Medan', '2002-10-02', 'bambang@gmail.com', '084398127634', 'Sistem Informasi', 'mentee', 2, '$2y$10$tkQis6y564iujUOwb6TeXe97nErUXsQlCSiaaZOp6paQxoSDe6PzK');
 
 --
 -- Indexes for dumped tables
@@ -187,7 +200,7 @@ ALTER TABLE `jawaban_ujian`
 -- AUTO_INCREMENT for table `pertemuan`
 --
 ALTER TABLE `pertemuan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `presensi`

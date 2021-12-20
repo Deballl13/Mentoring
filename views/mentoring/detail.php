@@ -12,10 +12,10 @@ $auth  = new Auth;
 $mentoring = new Mentoring;
 
 if(isset($_GET['id'])){
-    $materipertemuan = $mentoring->detail($_GET['id']);
+    $detailPertemuan = $mentoring->detailPertemuan($_GET['id']);
 }
 
-$title = 'Mentoring | Pendaftaran';
+$title = 'Mentoring | Detail Pertemuan';
 $menu = 'Mentoring';
 require_once '../layout/header.php';
 
@@ -51,11 +51,11 @@ require_once '../layout/header.php';
     <div class="col-lg-11 col-md-12 col-sm-12">
         <div class="card mx-2">
             <div class="card-body">
-            <?php if($_SESSION['user']['role'] === 'mentor'): ?>
-                <button type="button" class="btn btn-info float-right" data-bs-toggle="modal" data-bs-target="#tambahMateri" data-toggle="modal" data-target="#tambahMateri">Ambil Absen</button>
-                
-                <h3 class="role-header mb-5">Materi Pertemuan-</h3>
+                <?php if($_SESSION['user']['role'] === 'mentor'): ?>
+                <!-- <button type="button" class="btn btn-info float-right" data-bs-toggle="modal" data-bs-target="#tambahMateri" data-toggle="modal" data-target="#tambahMateri">Ambil Absen</button> -->
                 <?php endif ?>
+
+                <h3 class="role-header mb-5">Materi Pertemuan <?= $detailPertemuan['pertemuan_ke'] ?></h3>
                 <table id="listMateri" class="display" style="width:100%">
                     <thead>
                         <tr>                            
@@ -63,13 +63,9 @@ require_once '../layout/header.php';
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $i=1; foreach($materipertemuan as $materipertemuan): ?>
                         <tr>
-                            
-                            <td><?= $materipertemuan ?></td>                            
-                            
+                           <td><?= $detailPertemuan['materi'] ?></td>                            
                         </tr>
-                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
