@@ -50,7 +50,7 @@ class Mentoring{
         }
         catch(Exception $e){
             $this->db->rollback();
-            $_SESSION['gagal'] = "Proses pendafataran gagal";
+            $_SESSION['gagal'] = "Proses gagal";
         } 
 
         $statement->close();

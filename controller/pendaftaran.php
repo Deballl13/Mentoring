@@ -79,7 +79,7 @@ class Pendaftaran{
         }
         catch(Exception $e){
             $this->db->rollback();
-            $_SESSION['gagal'] = "Proses pembagian kelompok mentor gagal";
+            $_SESSION['gagal'] = "Proses gagal";
         }
 
         header("Location: ".BASEURL."/views/pendaftaran");  

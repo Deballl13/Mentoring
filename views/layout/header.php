@@ -60,26 +60,26 @@
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
+                <?php if($_SESSION['user']['role'] !== 'bpmai'): ?>
                 <li class="nav-item <?= ($menu==='Ujian') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?= BASEURL ?>/views/ujian">
                         <i class="mdi mdi-file-document menu-icon"></i>
                         <span class="menu-title">Ujian</span>
                     </a>
                 </li>
+                <?php endif ?>
                 <li class="nav-item <?= ($menu==='Mentoring') ? 'active' : '' ?>">
                 <a class="nav-link" href="<?= BASEURL ?>/views/mentoring">
                         <i class="mdi mdi mdi-account-multiple menu-icon"></i>
                         <span class="menu-title">Mentoring</span>
                     </a>
                 </li>
-                <?php if($_SESSION['user']['role'] !== 'bpmai' ): ?>
                 <li class="nav-item <?= ($menu==='Kelompok Mentoring') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?= BASEURL ?>/views/kelompok">
                         <i class="mdi mdi-account-group menu-icon"></i>
                         <span class="menu-title">Kelompok Mentoring</span>
                     </a>
                 </li>
-                <?php endif ?>
                 <?php if($_SESSION['user']['role'] === 'mentor' ||$_SESSION['user']['role'] === 'bpmai' ): ?>
                 <li class="nav-item <?= ($menu==='Pendaftaran') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?= BASEURL ?>/views/pendaftaran">

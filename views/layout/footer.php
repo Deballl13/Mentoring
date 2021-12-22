@@ -34,10 +34,21 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
     <script>
+        const formatNumber = (number) =>{
+            if(number < 10) return '0' + number;
+            else return number;
+        };
+
         const getDateTime = () => {
+            const date = new Date();
+            const month = [
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            ];
             const tanggal = document.getElementById('datetime');
-            const date = new Date().toLocaleString("en-US", {timeZone: "Asia/Jakarta", day:"numeric", month:"long", year:"numeric", hour:"numeric", minute:"numeric"});
-            tanggal.innerHTML = date;
+            const waktu = date.getDate() + ' ' + month[date.getMonth()] + ' ' + date.getFullYear() + 
+                        ', ' + formatNumber(date.getHours()) + ':' + formatNumber(date.getMinutes()) + ':' + formatNumber(date.getSeconds());
+            tanggal.innerHTML = waktu;
         }
         setInterval(getDateTime);
     </script>

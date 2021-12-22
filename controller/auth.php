@@ -47,7 +47,7 @@ class Auth{
         }   
         catch(Exception $e){
             $this->db->rollback();
-            $_SESSION['gagal'] = "Proses pendafataran gagal";
+            $_SESSION['gagal'] = "Proses gagal";
         }   
 
         if($status === 'mentee'){
@@ -88,7 +88,7 @@ class Auth{
         }
         catch(Exception $e){
             $this->db->rollback();
-            $_SESSION['gagal'] = "Proses login gagal";
+            $_SESSION['gagal'] = "Proses gagal";
         }
 
         if(isset($_SESSION['gagal'])){
@@ -124,6 +124,7 @@ class Auth{
         else{
             $_SESSION['gagal'] = 'Password gagal diganti';
         }
+
         $statement->close();
         header('Location: '.BASEURL.'/views/auth/profil.php');
     }
