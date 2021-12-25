@@ -44,4 +44,16 @@ class KelompokMentoring{
         return null;
     }
 
+    public function getListKelompokMentor(){
+        $listKelompokMentor = $this->db->query("SELECT * FROM users WHERE role='mentor' ORDER BY kelompok ASC");
+        
+        return $listKelompokMentor;
+    }
+
+    public function getListKelompokMentee(){
+        $listKelompokMentee = $this->db->query("SELECT * FROM users WHERE role='mentee' ORDER BY kelompok ASC");
+        
+        return $listKelompokMentee;
+    }
+
 }

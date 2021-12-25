@@ -22,7 +22,7 @@ require_once '../layout/header.php';
 
 ?>
 
-<h3 class="role-header mt-4 mx-2 mb-5">Ujian</h3>
+<h3 class="role-header mt-4 mx-2 mb-4">Ujian</h3>
 <?php if($_SESSION['user']['role'] === 'mentor'): ?>
 <button type="button" class="btn btn-primary mx-2 mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal" data-toggle="modal" data-target="#modalTambahUjian">
 Tambah ujian
@@ -81,7 +81,7 @@ Tambah ujian
 
     <?php if($_SESSION['user']['role'] === 'mentee'): ?>
     <?php foreach($getPostingUjian as $lu): ?>
-    <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="col-lg-4 col-md-6 col-sm-6 mt-3">
         <div class="card mx-2">
             <div class="card-body">
                 <div class="row">
@@ -94,7 +94,7 @@ Tambah ujian
                         <h6>
                             <?php 
                             $hours = floor($lu['durasi'] / 60);
-                            $minutes = floor($lu['durasi'] - 60);
+                            $minutes = floor($lu['durasi'] - 60) >= 0 ? $lu['durasi'] - 60 : $lu['durasi'];
                             $endExam = new DateTime($lu['tanggal']);
                             $endExam->modify('+'.$hours.' hour');
                             $endExam->modify('+'.$minutes.' minute');

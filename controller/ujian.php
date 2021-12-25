@@ -234,10 +234,10 @@ class Ujian{
     }
 
     public function getSubmission($id, $nim){
-        $statement = $this->db->prepare('SELECT soal_ujian.soal, soal_ujian.jawaban as kunci_jawaban, soal_ujian.bobot_nilai, jawaban_ujian.* FROM soal_ujian INNER JOIN jawaban_ujian ON soal_ujian.id = jawaban_ujian.id_soal WHERE soal_ujian.id_ujian = ? AND nim_peserta = ?');
+        $statement = $this->db->prepare('SELECT soal_ujian.soal, soal_ujian.jawaban as kunci_jawaban, soal_ujian.bobot_nilai, jawaban_ujian.* FROM soal_ujian INNER JOIN jawaban_ujian ON soal_ujian.id = jawaban_ujian.id_soal WHERE soal_ujian.id_ujian = ? AND nim_peserta = ? ORDER BY jawaban_ujian.id');
         $statement->bind_param('ii', $id, $nim);
         $statement->execute();
-        
+
         return $statement->get_result();
     }
 
@@ -245,7 +245,7 @@ class Ujian{
         try{
             $nilai = $data['nilai'];
 
-            $statement = $this->db->prepare('SELECT DISTINCT jawaban_ujian.id FROM soal_ujian INNER JOIN jawaban_ujian WHERE soal_ujian.id_ujian = ? AND jawaban_ujian.nim_peserta = ? ORDER BY jawaban_ujian.id_soal ASC');
+            $statement = $this->db->prepare('SELECT jawaban_ujian.id FROM soal_ujian INNER JOIN jawaban_ujian ON jawaban_ujian.id_soal = soal_ujian.id WHERE soal_ujian.id_ujian = ? AND jawaban_ujian.nim_peserta = ? ORDER BY jawaban_ujian.id_soal ASC;');
             $statement->bind_param('ii', $id, $nim);
             $statement->execute();
 

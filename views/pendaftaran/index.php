@@ -53,7 +53,7 @@ require_once '../layout/header.php';
         <div class="card mx-2">
             <div class="card-body">
                 <h3 class="role-header mb-5">Mentor</h3>
-                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#kelompokMentor" data-toggle="modal" data-target="#kelompokMentor">Bagi Kelompok</button>
+                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#kelompokMentor" data-toggle="modal" data-target="#kelompokMentor"  <?= $listMentor->fetch_assoc() === null ? 'disabled' : '' ?>>Bagi Kelompok</button>
                 <table id="listMentor" class="display" style="width:100%">
                     <thead>
                         <tr>
@@ -98,7 +98,7 @@ require_once '../layout/header.php';
             <div class="card-body">
                 <h3 class="role-header mb-5">Mentee</h3>
                 <?php if($_SESSION['user']['role'] === 'mentor'): ?>
-                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#kelompokMentee" data-toggle="modal" data-target="#kelompokMentee">Bagi Kelompok</button>
+                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#kelompokMentee" data-toggle="modal" data-target="#kelompokMentee" <?= $listMentee->fetch_assoc() === null ? 'disabled' : '' ?>>Bagi Kelompok</button>
                 <?php endif ?>
                 <table id="listMentee" class="display" style="width:100%">
                     <thead>

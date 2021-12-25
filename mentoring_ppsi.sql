@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2021 at 02:08 PM
+-- Generation Time: Dec 25, 2021 at 06:17 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -40,11 +40,16 @@ CREATE TABLE `jawaban_ujian` (
 --
 
 INSERT INTO `jawaban_ujian` (`id`, `nim_peserta`, `id_soal`, `jawaban`, `nilai`) VALUES
-(1, 1911521003, 7, 'jawaban soal 1', 45),
-(2, 1911521003, 8, 'jawaban soal 2', 43),
-(3, 1911521003, 9, 'jawaban soal 1', NULL),
-(4, 1911521003, 10, 'jawaban soal 2', NULL),
-(5, 1911521003, 11, 'jawaban soal 3', NULL);
+(1, 1911521003, 7, 'jawaban soal 1', 46),
+(2, 1911521003, 8, 'jawaban soal 2', 45),
+(3, 1911521003, 9, 'jawaban soal 1', 38),
+(4, 1911521003, 10, 'jawaban soal 2', 18),
+(5, 1911521003, 11, 'jawaban soal 3', 40),
+(6, 1911521003, 12, 'jawaban soal 1', 30),
+(7, 1911521003, 13, 'jawaban soal 2', 30),
+(8, 1911521003, 14, 'jawaban soal 3', 10),
+(9, 1911521003, 15, 'jawaban soal 4', 13),
+(10, 1911521003, 16, 'jawaban soal 1', NULL);
 
 -- --------------------------------------------------------
 
@@ -113,17 +118,16 @@ CREATE TABLE `soal_ujian` (
 --
 
 INSERT INTO `soal_ujian` (`id`, `id_ujian`, `soal`, `jawaban`, `bobot_nilai`) VALUES
-(1, 6, 'soal 1', 'jawaban soal 1', 25),
-(2, 6, 'soal 2', 'jawaban soal 2', 15),
-(3, 6, 'soal 3', 'jawaban soal 3', 15),
-(4, 6, 'soal 4', 'jawaban soal 4', 15),
-(5, 6, 'soal 5', 'jawaban soal 5', 15),
-(6, 6, 'soal 6', 'jawaban soal 6', 15),
 (7, 7, 'soal 1', 'jawaban soal 1', 50),
 (8, 7, 'soal 2', 'jawaban soal 2', 50),
 (9, 8, 'soal 1', 'jawaban soal 1', 40),
 (10, 8, 'soal 2', 'jawaban soal 2', 20),
-(11, 8, 'soal 3', 'jawaban soal 3', 40);
+(11, 8, 'soal 3', 'jawaban soal 3', 40),
+(12, 11, 'soal 1', 'jawaban soal 1', 30),
+(13, 11, 'soal 2', 'jawaban soal 2', 30),
+(14, 11, 'soal 3', 'jawaban soal 3', 15),
+(15, 11, 'soal 4', 'jawaban soal 4', 15),
+(16, 12, 'soal 1', 'jawaban soal 1', 100);
 
 -- --------------------------------------------------------
 
@@ -143,9 +147,10 @@ CREATE TABLE `ujian` (
 --
 
 INSERT INTO `ujian` (`id`, `tanggal`, `durasi`, `status`) VALUES
-(6, '2022-01-01 10:00:00', 90, 1),
 (7, '2021-12-22 17:15:00', 90, 1),
-(8, '2021-12-22 20:03:00', 90, 1);
+(8, '2021-12-22 20:03:00', 90, 1),
+(11, '2021-12-22 23:30:00', 90, 1),
+(12, '2021-12-26 00:10:00', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -250,13 +255,13 @@ ALTER TABLE `presensi`
 -- AUTO_INCREMENT for table `soal_ujian`
 --
 ALTER TABLE `soal_ujian`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `ujian`
 --
 ALTER TABLE `ujian`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

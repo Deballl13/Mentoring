@@ -24,3 +24,6 @@ else if(isset($_POST['submit_jawaban']) && isset($_GET['id'])){
 else if(isset($_POST['submit_nilai']) && isset($_GET['id']) && isset($_GET['nim'])){
     $ujian->tambahNilaiSubmission($_POST, $_GET['id'], $_GET['nim']);
 }
+else if(isset($_GET['id'])){
+    $ujian->submitJawaban($_POST, $_GET['id']);
+}
