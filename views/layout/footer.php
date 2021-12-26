@@ -2,7 +2,7 @@
             <!-- partial:./partials/_footer.html -->
             <footer class="footer mx-4 mt-5" style="font-family: 'Open Sans', sans-serif;">
                 <div class="justify-content-center justify-content-sm-between">
-                    <p class="text-center text-dark">Copyright &copy; 2021  Kelompok 2 PPSI.</p>
+                    <p class="text-center text-dark">&copy; 2021  Kelompok 2 PPSI.</p>
                     <p class="text-center text-dark mt-3">Templated By: <a href="https://www.themewagon.com/" target="_blank">ThemeWagon</a></p>
                 </div>
             </footer>

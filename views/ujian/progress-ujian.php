@@ -23,7 +23,7 @@ require_once '../layout/header.php';
 
 <h3 class="role-header mt-4 mx-2 mb-5">Ujian</h3>
 <h4 class="mx-2 mb-2 d-flex justify-content-end mr-5 pr-5" id="countdown"></h4>
-<form action="<?= BASEURL ?>/routes/routeUjian.php?id=<?= $_GET['id'] ?>" method="post" id="form-soal">  
+<form action="<?= BASEURL ?>/routes/routeUjian.php?id=<?= $_GET['id'] ?>" method="post" id="form-jawaban">  
     <?php $i=1 ?>
     <div id="soal-ujian">
 
@@ -45,7 +45,7 @@ require_once '../layout/header.php';
         <?php $i++; endforeach; ?>
 
     </div>
-    <button class="btn btn-primary ml-2 mt-4 mr-1" name="submit_jawaban" type="submit">Submit jawaban</button>
+    <button class="btn btn-primary ml-2 mt-4 mr-1" name="submit_jawaban" type="submit" id="button_submit_ujian">Submit jawaban</button>
 </form>
 
 <?php require_once '../layout/footer.php' ?>
@@ -55,7 +55,7 @@ require_once '../layout/header.php';
     timeFromMysqlParts[1]--;
     const endExam = new Date(...timeFromMysqlParts);
     endExam.setHours(endExam.getHours() + Math.floor(<?= $durasi['durasi'] ?> / 60));
-    endExam.setMinutes(endExam.getMinutes() + Math.floor(<?= $durasi['durasi'] ?> - 60));
+    endExam.setMinutes(endExam.getMinutes() + (Math.floor(<?= $durasi['durasi'] ?> - 60) >= 0 ? Math.floor(<?= $durasi['durasi'] ?> - 60) : Math.floor(<?= $durasi['durasi'] ?>)));
     
     const countdown = () => {
         const time = document.getElementById('countdown');
@@ -70,8 +70,10 @@ require_once '../layout/header.php';
             time.innerHTML = formatNumber(jam) + ':' + formatNumber(menit) + ':' + formatNumber(detik);
         }
         else{
-            const form = document.getElementById('form-soal');
-            form.submit();
+            const button_submit_ujian = document.getElementById('button_submit_ujian');
+            button_submit_ujian.click(function(){
+                clearInterval();
+            });
         }
     };
 

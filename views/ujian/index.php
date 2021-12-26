@@ -55,7 +55,7 @@ Tambah ujian
 <div class="row">
     <?php if($_SESSION['user']['role'] === 'mentor'): ?>
     <?php foreach($listUjian as $lu): ?>
-    <div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="col-lg-4 col-md-6 col-sm-6 mt-3">
         <div class="card mx-2">
             <div class="card-body">
                 <div class="row">
