@@ -8,16 +8,14 @@ if(!isset($_SESSION['user'])){
     header('Location: '.BASEURL.'/views/auth/login.php');
 }
 
-$auth  = new Auth;
 $mentoring = new Mentoring;
+$lihatPresensi = $mentoring->lihatPresensi();
 
 if(isset($_GET['id'])){
     $detailPertemuan = $mentoring->detailPertemuan($_GET['id']);
 }
 
-// $listPertemuan = $mentoring->listPertemuan();
-
-$title = 'Mentoring | Detail Pertemuan';
+$title = 'Mentoring | Mentoring';
 $menu = 'Mentoring';
 require_once '../layout/header.php';
 
@@ -53,54 +51,37 @@ require_once '../layout/header.php';
     <div class="col-lg-11 col-md-12 col-sm-12">
         <div class="card mx-2">
             <div class="card-body">
-                <?php if($_SESSION['user']['role'] === 'mentee'): ?>
-                <!-- <a class="btn btn-primary" href="<?= BASEURL ?>/views/mentoring/presensi.php?id=<?= $detailPertemuan['id'] ?>">Detail</a> -->
-                
-                <a class="btn btn-primary float-right" href="<?= BASEURL ?>/views/mentoring/presensi.php?id=<?= $detailPertemuan['id'] ?>">Presensi</a>
+                <h3 class="role-header mb-5">Presensi Mentoring</h3>
+                <?php if($_SESSION['user']['role'] === 'mentor'): ?>
+                <!-- <a class="btn btn-primary mb-4" href="<?= BASEURL ?>/views/mentoring/tambah.php">Tambah</a> -->
                 <?php endif ?>
-
-                <h3 class="role-header mb-5">Materi Pertemuan <?= $detailPertemuan['pertemuan_ke'] ?></h3>
                 <table id="listMateri" class="display" style="width:100%">
                     <thead>
-                        <tr>                            
-                           
+                        <tr class="text-center">
+                            <th>No.</th>
+                            <th>Kelompok</th>
+                            <th>Pertemuan Ke</th>
+                            <th>Nama</th>
+                            <th>Status Kehadiran</th>                        
+                            <th>Waktu</th>
+                            <
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                           <td><?= $detailPertemuan['materi'] ?></td>                            
+                        <?php $i=1; foreach($lihatPresensi as $lp): ?>
+                        <tr class="text-center">
+                            <td><?= $i++.'.' ?></td>
+                            <td><?= $lp['kelompok'] ?></td>
+                            <td><?= $lp['pertemuan'] ?></td>
+                            <td><?= $lp['nama'] ?></td>
+                            <td><?= $lp['status_kehadiran'] ?></td>
+                            <td><?= $lp['waktu'] ?></td>                            
+                            
                         </tr>
+                        <?php endforeach ?>
                     </tbody>
-                 
                 </table>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Tambah Materi -->
-<div class="modal fade" id="tambahMateri" tabindex="-1" aria-labelledby="tambahMateriLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title mt-2" id="tambahMateriLabel">Kelompok mentor</h3>
-            </div>
-            <div class="modal-body">
-                <form action="<?= BASEURL ?>/routes/routeMentoring.php" method="post">
-                    <div class="form-group">
-                        <label for="tanggal_mentoring">Tanggal Mentoring</label>
-                        <input type="date" min="1" class="form-control form-control-lg" id="exampletanggal_mentoring" placeholder="Tanggal Mentoring" id="tanggal_mentoring" name="tanggal_mentoring">
-                    </div>
-                    <div class="form-group">
-                        <label for="materi">Materi Mentoring</label>
-                        <input type="text" min="1" class="form-control form-control-lg" id="examplemateri" placeholder="Materi Mentoring" id="materi" name="materi">
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Reset</button>
-                <button type="submit" name="bagi-kelompok-mentor" class="btn btn-primary">Bagi</button>
-            </div>
-                </form>
         </div>
     </div>
 </div>
@@ -109,11 +90,7 @@ require_once '../layout/header.php';
 <?php require_once '../layout/footer.php' ?>
 <script>
     $(document).ready(function() {
-        $('#listMentor').DataTable({
-            "ordering": false,
-            "info":     false
-        });
-        $('#listMentee').DataTable({
+        $('#listMateri').DataTable({
             "ordering": false,
             "info":     false
         });

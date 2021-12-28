@@ -2,17 +2,17 @@
 session_start();
 require_once '../../config.php';
 require_once '../../controller/auth.php';
-require_once '../../controller/mentoring.php';
+require_once '../../controller/presensi.php';
 
 if(!isset($_SESSION['user'])){
     header('Location: '.BASEURL.'/views/auth/login.php');
 }
 
-$mentoring = new Mentoring;
-$listPertemuan = $mentoring->listPertemuan();
+$presensi = new Presensi;
+$listPresensi = $presensi->listPresensi();
 
-$title = 'Mentoring | Mentoring';
-$menu = 'Mentoring';
+$title = 'Presensi | Presensi';
+$menu = 'Presensi';
 require_once '../layout/header.php';
 
 ?>
@@ -47,9 +47,9 @@ require_once '../layout/header.php';
     <div class="col-lg-11 col-md-12 col-sm-12">
         <div class="card mx-2">
             <div class="card-body">
-                <h3 class="role-header mb-5">Mentoring</h3>
+                <h3 class="role-header mb-5">Presensi</h3>
                 <?php if($_SESSION['user']['role'] === 'mentor'): ?>
-                <a class="btn btn-primary mb-4" href="<?= BASEURL ?>/views/mentoring/tambah.php">Tambah</a>
+                <a class="btn btn-primary mb-4" href="<?= BASEURL ?>/views/presensi/tambah.php">Tambah Presensi</a>
                 <?php endif ?>
                 <table id="listMateri" class="display" style="width:100%">
                     <thead>
@@ -71,9 +71,7 @@ require_once '../layout/header.php';
                             <td>
                                 <form action="<?= BASEURL ?>/routes/routeMentoring.php" method="post" onsubmit="return confirm('Yakin mau dihapus?')">
                                     <a class="btn btn-primary" href="<?= BASEURL ?>/views/mentoring/detail.php?id=<?= $lp['id'] ?>">Detail</a>
-                                    
                                     <?php if($_SESSION['user']['role'] === 'mentor'): ?>
-                                        <a class="btn btn-success" href="<?= BASEURL ?>/views/mentoring/lihatpresensi.php?id=<?= $lp['id'] ?>">Presensi</a>
                                     <input type="text" name="id" value="<?= $lp['id'] ?>" class="d-none">
                                     <button type="submit" name="hapus" class="btn btn-danger">Hapus</button>
                                     <?php endif ?>

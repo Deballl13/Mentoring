@@ -74,6 +74,12 @@
                         <span class="menu-title">Mentoring</span>
                     </a>
                 </li>
+                <!-- <li class="nav-item <?= ($menu==='Presensi') ? 'active' : '' ?>">
+                <a class="nav-link" href="<?= BASEURL ?>/views/presensi">
+                        <i class="mdi mdi mdi-account-multiple menu-icon"></i>
+                        <span class="menu-title">Presensi</span>
+                    </a>
+                </li> -->
                 <li class="nav-item <?= ($menu==='Kelompok Mentoring') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?= BASEURL ?>/views/kelompok">
                         <i class="mdi mdi-account-group menu-icon"></i>
