@@ -16,7 +16,15 @@ class Mentoring{
     }
 
     public function detailPertemuan($id){
-        $statement = $this->db->prepare('SELECT id, pertemuan_ke, materi FROM pertemuan WHERE id = ?');
+        $statement = $this->db->prepare('SELECT pertemuan.id, pertemuan.pertemuan_ke, pertemuan.materi, presensi.status_kehadiran FROM pertemuan LEFT JOIN presensi ON pertemuan.id = presensi.id_pertemuan WHERE pertemuan.id = ? AND (presensi.nim_peserta = ? OR presensi.nim_peserta IS NULL)');
+        $statement->bind_param('ii', $id, $_SESSION['user']['nim']);
+        $statement->execute();
+
+        return $statement->get_result()->fetch_assoc();
+    }
+
+    public function detailPertemuanBPMAI($id){
+        $statement = $this->db->prepare('SELECT pertemuan.id, pertemuan.pertemuan_ke, pertemuan.materi FROM pertemuan WHERE pertemuan.id = ?');
         $statement->bind_param('i', $id);
         $statement->execute();
 
@@ -24,14 +32,11 @@ class Mentoring{
     }
 
     public function lihatPresensi($id){
-        $statement = $this->db->prepare('SELECT presensi.id, pertemuan.pertemuan_ke, presensi.status_kehadiran, presensi.waktu, users.nama, users.kelompok FROM presensi INNER JOIN users ON users.nim=presensi.nim_peserta INNER JOIN pertemuan ON presensi.id_pertemuan=pertemuan.id_pertemuan  WHERE id_pertemuan = ?');
-        // $statement = $this->db->prepare('SELECT * pertemuan.pertemuan_ke, users.nama, users.kelompok FROM presensi INNER JOIN users ON users.nim=presensi.nim_peserta INNER JOIN pertemuan ON presensi.id_pertemuan=pertemuan.id_pertemuan  WHERE id_pertemuan = ?');
-       
-        // return $lihatPresensi;
+        $statement = $this->db->prepare('SELECT presensi.id, pertemuan.pertemuan_ke, presensi.status_kehadiran, presensi.waktu, users.nama, users.kelompok FROM presensi INNER JOIN users ON users.nim = presensi.nim_peserta INNER JOIN pertemuan ON presensi.id_pertemuan = pertemuan.id WHERE pertemuan.id = ?');
         $statement->bind_param('i', $id);
         $statement->execute();
 
-        return $statement->get_result()->fetch_assoc();
+        return $statement->get_result();
     }
 
     public function tambahPertemuan($data){
@@ -68,7 +73,7 @@ class Mentoring{
         header("Location: ".BASEURL."/views/mentoring");  
     }
 
-    public function submitPresensi ($data){
+    public function submitPresensi($data){
         $nim_peserta = htmlspecialchars(trim($data['nim_peserta']));
         $id_pertemuan = htmlspecialchars(trim($data['id_pertemuan']));
         $status_kehadiran = htmlspecialchars(trim($data['status_kehadiran']));
@@ -83,27 +88,18 @@ class Mentoring{
         $baca_buku = htmlspecialchars(trim($data['baca_buku']));
         $kegiatan_ukhuwah = htmlspecialchars(trim($data['kegiatan_ukhuwah']));
         
-        $statement =$this->db->prepare("INSERT INTO presensi (nim_peserta, id_pertemuan, status_kehadiran, waktu, sholat_fardhu_berjamaah, qiyamul_lail, sholat_dhuha, sholat_rawatib, tilawah_quran, infaq, olahraga, baca_buku, kegiatan_ukhuwah) 
-                                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            if (!$statement) {
-                echo "false";
-            }
-            else {
-                $statement->bind_param("sssssssssssss", $nim_peserta, $id_pertemuan, $status_kehadiran,  $waktu, $sholat_fardhu_berjamaah, $qiyamul_lail, $sholat_dhuha, $sholat_rawatib,  $tilawah_quran, $infaq, $olahraga, $baca_buku, $kegiatan_ukhuwah);
-                $statement->execute();
-                $statement->close();
-                if($this->db->commit() == true){
-                    $_SESSION['berhasil'] = "Selamat, berhasil menambahkan presensi";
-                }
-                else{
-                    $_SESSION['gagal'] = "Maaf, tidak berhasil menambahkan presensi";
-                }
-            }
+        $statement =$this->db->prepare("INSERT INTO presensi VALUES ('', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $statement->bind_param("sssssssssssss", $nim_peserta, $id_pertemuan, $status_kehadiran, $waktu, $sholat_fardhu_berjamaah, $qiyamul_lail, $sholat_dhuha, $sholat_rawatib,  $tilawah_quran, $infaq, $olahraga, $baca_buku, $kegiatan_ukhuwah);
+        $statement->execute();
 
+        if($this->db->affected_rows > 0){
+            $_SESSION['berhasil'] = "Selamat, berhasil menambahkan presensi";
+        }
+        else{
+            $_SESSION['gagal'] = "Maaf, tidak berhasil menambahkan presensi";
+        }
 
-        
-            header("Location: ".BASEURL."/views/mentoring/index.php");  
-        
+        header("Location: ".BASEURL."/views/mentoring/index.php");  
     }
 
     public function deletePertemuan($id){

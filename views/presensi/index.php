@@ -9,10 +9,12 @@ if(!isset($_SESSION['user'])){
 }
 
 $presensi = new Presensi;
-$listPresensi = $presensi->listPresensi();
+if(isset($_GET['id'])){
+    $listPresensi = $presensi->listPresensiPeserta($_GET['id']);
+}
 
-$title = 'Presensi | Presensi';
-$menu = 'Presensi';
+$title = 'Mentoring | Lihat Presensi';
+$menu = 'Mentoring';
 require_once '../layout/header.php';
 
 ?>
@@ -57,26 +59,20 @@ require_once '../layout/header.php';
                             <th>No.</th>
                             <th>Kelompok</th>
                             <th>Pertemuan ke</th>
-                            <th>Jadwal</th>
-                            <th>Aksi</th>
+                            <th>Nama</th>
+                            <th>Status Kehadiran</th>                        
+                            <th>Waktu</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $i=1; foreach($listPertemuan as $lp): ?>
+                        <?php $i=1; foreach($listPresensi as $lp): ?>
                         <tr class="text-center">
                             <td><?= $i++.'.' ?></td>
                             <td><?= $lp['kelompok'] ?></td>
+                            <td><?= $lp['nama'] ?></td>
                             <td><?= $lp['pertemuan_ke'] ?></td>
-                            <td><?= date('d-m-Y', strtotime($lp['tanggal'])).' ('.date('H:i', strtotime($lp['waktu'])).')' ?></td>                            
-                            <td>
-                                <form action="<?= BASEURL ?>/routes/routeMentoring.php" method="post" onsubmit="return confirm('Yakin mau dihapus?')">
-                                    <a class="btn btn-primary" href="<?= BASEURL ?>/views/mentoring/detail.php?id=<?= $lp['id'] ?>">Detail</a>
-                                    <?php if($_SESSION['user']['role'] === 'mentor'): ?>
-                                    <input type="text" name="id" value="<?= $lp['id'] ?>" class="d-none">
-                                    <button type="submit" name="hapus" class="btn btn-danger">Hapus</button>
-                                    <?php endif ?>
-                                </form>
-                            </td>
+                            <td><?= $lp['status_kehadiran'] ?></td>
+                            <td><?= date('d-m-Y H:i', strtotime($lp['waktu'])) ?></td>      
                         </tr>
                         <?php endforeach ?>
                     </tbody>

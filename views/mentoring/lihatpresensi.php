@@ -9,13 +9,12 @@ if(!isset($_SESSION['user'])){
 }
 
 $mentoring = new Mentoring;
-$lihatPresensi = $mentoring->lihatPresensi();
 
 if(isset($_GET['id'])){
-    $detailPertemuan = $mentoring->detailPertemuan($_GET['id']);
+    $lihatPresensi = $mentoring->lihatPresensi($_GET['id']);
 }
 
-$title = 'Mentoring | Mentoring';
+$title = 'Mentoring | Lihat Presensi';
 $menu = 'Mentoring';
 require_once '../layout/header.php';
 
@@ -52,9 +51,6 @@ require_once '../layout/header.php';
         <div class="card mx-2">
             <div class="card-body">
                 <h3 class="role-header mb-5">Presensi Mentoring</h3>
-                <?php if($_SESSION['user']['role'] === 'mentor'): ?>
-                <!-- <a class="btn btn-primary mb-4" href="<?= BASEURL ?>/views/mentoring/tambah.php">Tambah</a> -->
-                <?php endif ?>
                 <table id="listMateri" class="display" style="width:100%">
                     <thead>
                         <tr class="text-center">
@@ -64,7 +60,6 @@ require_once '../layout/header.php';
                             <th>Nama</th>
                             <th>Status Kehadiran</th>                        
                             <th>Waktu</th>
-                            <
                         </tr>
                     </thead>
                     <tbody>
@@ -72,10 +67,10 @@ require_once '../layout/header.php';
                         <tr class="text-center">
                             <td><?= $i++.'.' ?></td>
                             <td><?= $lp['kelompok'] ?></td>
-                            <td><?= $lp['pertemuan'] ?></td>
+                            <td><?= $lp['pertemuan_ke'] ?></td>
                             <td><?= $lp['nama'] ?></td>
                             <td><?= $lp['status_kehadiran'] ?></td>
-                            <td><?= $lp['waktu'] ?></td>                            
+                            <td><?= date('d-m-Y H:i', strtotime($lp['waktu'])) ?></td>                            
                             
                         </tr>
                         <?php endforeach ?>

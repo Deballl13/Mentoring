@@ -18,8 +18,8 @@ if(isset($_GET['id'])){
     $detailPertemuan = $mentoring->detailPertemuan($_GET['id']);
 }
 
-$title = 'Presensi | Tambah Presensi';
-$menu = 'Presensi';
+$title = 'Mentoring | Tambah Presensi';
+$menu = 'Mentoring';
 require_once '../layout/header.php';
 
 ?>
@@ -57,10 +57,10 @@ require_once '../layout/header.php';
             <h3 class="role-header mb-3">Presensi dan Amalan Yaumi</h3>
             <form method="POST" action="<?= BASEURL ?>/routes/routeMentoring.php" class="pt-3">
                 <div class="form-group">
-                    <label for="nim_peserta">nim_peserta Peserta</label>
+                    <label for="nim_peserta">NIM Peserta</label>
                     <input type="text" class="form-control" name="nim_peserta" id="nim" value="<?= $_SESSION['user']['nim'] ?>" readonly>
                 </div>
-                <div class="form-group">
+                <div class="form-group d-none">
                     <label for="waktu">Pertemuan</label>
                     <input type="text" class="form-control" name="id_pertemuan" id="id_pertemuan" value="<?= $detailPertemuan['id'] ?>" readonly>
                 </div>

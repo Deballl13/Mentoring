@@ -12,5 +12,5 @@ else if(isset($_POST['tambah-materi'])){
     $mentoring->tambahPertemuan($_POST, 'mentor');
 }
 else if(isset($_POST['submit-presensi'])){
-    $mentoring->submitPresensi($_POST, 'mentee');
+    $mentoring->submitPresensi($_POST);
 }

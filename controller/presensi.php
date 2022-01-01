@@ -79,6 +79,11 @@ class Presensi{
         header('Location: '.BASEURL.'/views/mentoring');
     }
 
+    public function listPresensiPeserta($id){
+        $statement = $this->db->prepare('SELECT presensi.id, pertemuan.pertemuan_ke, presensi.status_kehadiran, presensi.waktu, users.nama, users.kelompok FROM presensi INNER JOIN users ON users.nim = presensi.nim_peserta INNER JOIN pertemuan ON presensi.id_pertemuan = pertemuan.id WHERE pertemuan.id = ? GROUP BY users.kelompok ORDER BY users.kelompok ASC');
+        $statement->bind_param('i', $id);
+        $statement->execute();
 
-
+        return $statement->get_result();
+    }
 }
