@@ -54,14 +54,14 @@ require_once '../layout/header.php';
             <div class="card-body">
                 <?php if($_SESSION['user']['role'] === 'mentee'): ?>       
                 <a class="btn btn-primary float-right<?= $detailPertemuan['status_kehadiran'] !== null ? ' disabled' : '' ?>" href="<?= BASEURL ?>/views/mentoring/presensi.php?id=<?= $detailPertemuan['id'] ?>">Presensi</a>
-                <?php elseif($_SESSION['user']['role'] === 'bpmai'): ?>
+                <?php elseif($_SESSION['user']['role'] === 'mentor' || $_SESSION['user']['role'] === 'bpmai' ): ?>
                 <a class="btn btn-primary float-right" href="<?= BASEURL ?>/views/presensi/index.php?id=<?= $detailPertemuanBPMAI['id'] ?>">Lihat presensi</a>
                 <?php endif ?>
 
                 <?php if($_SESSION['user']['role'] === 'mentee'): ?>
                 <h3 class="role-header mb-5">Materi Pertemuan <?= $detailPertemuan['pertemuan_ke'] ?></h3>
                 <p><?= $detailPertemuan['materi'] ?></p>
-                <?php elseif($_SESSION['user']['role'] === 'bpmai'): ?>
+                <?php elseif($_SESSION['user']['role'] === 'mentor' || $_SESSION['user']['role'] === 'bpmai'): ?>
                 <h3 class="role-header mb-5">Materi Pertemuan <?= $detailPertemuanBPMAI['pertemuan_ke'] ?></h3>
                 <p><?= $detailPertemuanBPMAI['materi'] ?></p>
                 <?php endif ?>
